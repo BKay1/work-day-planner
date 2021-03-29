@@ -1,12 +1,17 @@
-# 05 Third-Party APIs: Work Day Scheduler
+# 05 Work Day Planner
 
-## Your Task
+## Task:
+
+To create a simple calendar application that allows a user to save events for each hour of the day.
 
 ### Methodology
 
 Main Actions:
 
-1.  Drafted a wireframe outlining the main tasks of building
+1.  Drafted a wireframe outlining the main tasks of building a simple day planner;
+2.  Using the html and css provided create time blocks from 9AM-5PM;
+3.  Added the date in the main.js using moment.js;
+4.
 
 # Screenshots
 
