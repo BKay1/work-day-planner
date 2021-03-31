@@ -7,7 +7,7 @@ const getCurrentDate = () => {
 };
 
 const renderCalenderEvents = () => {
-  const plannerEvents = localStorage.getItem("plannerEvents");
+  const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
 
   if (plannerEvents !== null) {
     //declare variable to get current hour
@@ -19,14 +19,18 @@ const renderCalenderEvents = () => {
     //get time block elements in an array
     const timeBlocksArray = $(".container .row");
     const callback = function () {
+      const textArea = $(this).find("textarea");
       const timeBlockTime = Number.parseInt($(this).data("time"), 10);
       //time-blocks to be colour coded
       if (timeBlockTime === currentHour) {
-        $(this).find("textarea").removeClass("past").addClass("present");
+        textArea.removeClass("past").addClass("present");
       }
       if (timeBlockTime > currentHour) {
-        $(this).find("textarea").removeClass("past").addClass("future");
+        textArea.removeClass("past").addClass("future");
       }
+
+      const plannedEvent = plannerEvents[timeBlockTime];
+      textArea.text(plannedEvent);
     };
     timeBlocksArray.each(callback);
   } else {
