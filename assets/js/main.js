@@ -6,15 +6,13 @@ const getCurrentDate = () => {
   dateTime.text(displayNow);
 };
 
-const renderCalenderEvents = () => {
+//on load of page render the calender events
+const renderPlannerEvents = () => {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
 
   if (plannerEvents !== null) {
-    //declare variable to get current hour
-    // const currentHour = moment().hour();
-
-    //delete this and reinstate up
-    const currentHour = 11;
+    //declare variable to get current hour from moment.js
+    const currentHour = moment().hour();
 
     //get time block elements in an array
     const timeBlocksArray = $(".container .row");
@@ -38,16 +36,29 @@ const renderCalenderEvents = () => {
   }
 };
 
-// on ready function
+//on button click get items from local storage into planner
+const onClick = function (event) {
+  const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
+  const target = $(event.target);
+  const currentTarget = $(event.currentTarget);
+  if (target.is("button")) {
+    const key = target.attr("id");
+    const value = target.parent().find("textarea").val();
+
+    const newObject = {
+      ...plannerEvents,
+      [key]: value,
+    };
+    localStorage.setItem("plannerEvents", JSON.stringify(newObject));
+  }
+};
+
+// on ready function get current date and render planner events
 const onReady = () => {
+  //set event listener on container
+  $(".container").click(onClick);
   getCurrentDate();
-  renderCalenderEvents();
+  renderPlannerEvents();
 };
 
 $("document").ready(onReady);
-
-//create save function of planner entry with event listener
-
-//set planner entry in local storage
-
-//entries need to be seen after app refresh
