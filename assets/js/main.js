@@ -12,9 +12,7 @@ const renderPlannerEvents = () => {
 
   if (plannerEvents !== null) {
     //declare variable to get current hour from moment.js
-    // const currentHour = moment().hour();
-
-    const currentHour = 11;
+    const currentHour = moment().hour();
 
     //get time block elements in an array
     const timeBlocksArray = $(".container .row");
